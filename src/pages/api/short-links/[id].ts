@@ -13,6 +13,11 @@ export default async function handler(req: any, res: any) {
   const { id } = req.query;
 
   switch (req.method) {
+    case "GET":
+      const shortLink = await ShortLink.findById(id);
+      res.status(200).send(shortLink);
+      break;
+
     case "POST":
       res.status(201).send({
         title: "new post",
@@ -20,9 +25,16 @@ export default async function handler(req: any, res: any) {
       });
       break;
 
-    case "GET":
-      const shortLink = await ShortLink.findById(id);
-      res.status(200).send(shortLink);
+    case "PATCH":
+      const updatedShortLink = await ShortLink.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      res.send(updatedShortLink);
+      break;
+
+    case "DELETE":
+      await ShortLink.findByIdAndDelete(id);
+      res.status(204).send("삭제되었습니다.");
       break;
 
     default:

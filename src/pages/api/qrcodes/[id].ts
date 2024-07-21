@@ -1,5 +1,5 @@
 import dbConnect from "@/db/dbConnect";
-import ShortLink from "@/db/models/ShortLink";
+import QRCode from "@/db/models/QRCode";
 import mongoose from "mongoose";
 
 export default async function handler(req: any, res: any) {
@@ -8,13 +8,18 @@ export default async function handler(req: any, res: any) {
 
   switch (req.method) {
     case "GET":
-      const shortLink = await ShortLink.findById(id);
-      res.status(200).send("shortLink 조회", shortLink);
+      const qrCode = await QRCode.findById(id);
+      res.status(200).send(qrCode);
+      break;
 
     case "PATCH":
-      res.status(200).send({ ...req.body, ...req.query });
+      const updatedQrCode = await QRCode.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      res.status(200).send(updatedQrCode);
 
     case "DELETE":
+      await QRCode.findByIdAndDelete(id);
       res.status(204).send();
 
     default:

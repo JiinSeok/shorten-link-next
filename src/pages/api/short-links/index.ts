@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
     case "GET":
       const shortLinks = await ShortLink.find();
-      res.status(401).send(shortLinks);
+      res.status(200).send(shortLinks);
       break;
 
     default:

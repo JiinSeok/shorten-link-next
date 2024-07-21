@@ -2,6 +2,21 @@
 GET http://localhost:3000/api/hello
 
 ###
+GET http://localhost:3000/api/short-links
+
+###
+POST http://localhost:3000/api/short-links
+Content-Type: application/json
+
+{
+  "title": "블로그",
+  "url": "https://jiiniidevv.tistory.com"
+}
+
+###
+GET http://localhost:3000/api/short-links/669cc4caf93d16a1d652df9b
+
+###
 GET http://localhost:3000/api/short-links/123?q=pochacco
 
 ###
@@ -48,3 +63,6 @@ DELETE http://localhost:3000/api/qrcodes/abc
 
 ###
 POST http://localhost:3000/api/qrcodes/abc
+
+###
+POST http://localhost:3000/api/short-links

@@ -1,4 +1,12 @@
-export default function handler(req: any, res: any) {
+import dbConnect from "@/db/dbConnect";
+import mongoose from "mongoose";
+import QRCode from "@/db/models/QRCode";
+
+export default async function handler(req: any, res: any) {
+  await dbConnect();
+  const props = Object.keys(QRCode.schema.paths);
+  console.log(props);
+
   switch (req.method) {
     case "GET":
       res.status(200).send([

@@ -1,6 +1,5 @@
 import dbConnect from "@/db/dbConnect";
 import QRCode from "@/db/models/QRCode";
-import mongoose from "mongoose";
 
 export default async function handler(req: any, res: any) {
   await dbConnect();
@@ -16,13 +15,16 @@ export default async function handler(req: any, res: any) {
       const updatedQrCode = await QRCode.findByIdAndUpdate(id, req.body, {
         new: true,
       });
-      res.status(200).send(updatedQrCode);
+      res.send(updatedQrCode);
+      break;
 
     case "DELETE":
       await QRCode.findByIdAndDelete(id);
       res.status(204).send();
+      break;
 
     default:
       res.status(404).send();
+      break;
   }
 }

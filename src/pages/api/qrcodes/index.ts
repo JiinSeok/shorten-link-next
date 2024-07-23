@@ -1,5 +1,4 @@
 import dbConnect from "@/db/dbConnect";
-import mongoose from "mongoose";
 import QRCode from "@/db/models/QRCode";
 
 export default async function handler(req: any, res: any) {

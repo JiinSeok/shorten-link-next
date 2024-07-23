@@ -11,6 +11,7 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   await dbConnect();
   const shortLink = await ShortLink.findById(id);
+
   if (shortLink) {
     return {
       props: {
